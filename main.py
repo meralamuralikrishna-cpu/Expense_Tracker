@@ -25,14 +25,16 @@ def Add_Expense():
 def View_Expense():
     with open("expenses.json","r") as file:
         loaded_data = json.load(file)
-
+    
     id = input("Enter Id to view the Expense")
-    for i in range(0,len(loaded_data)):
+    for i in range(0,len(loaded_data["expenses"])):
         if loaded_data["expenses"][i]["id"] == id:
-            print(loaded_data)
+            print(loaded_data["expenses"][i])
+            break
             
         else:
             print(f"No Id was Found By the {id}")
+            
             
 
 View_Expense()

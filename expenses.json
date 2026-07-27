@@ -1,18 +1,25 @@
 {
     "expenses": [
         {
-            "id": "0",
-            "data": "0",
-            "amount": "0",
-            "category": "0",
-            "description": "0"
+            "id": "1",
+            "date": "2026-12-28",
+            "amount": 735000,
+            "category": "laptop",
+            "description": "noting"
         },
         {
-            "id": "1",
-            "data": "1",
-            "amount": "1",
-            "category": "1",
-            "description": "1"
+            "id": "2",
+            "date": "2023",
+            "amount": 2000,
+            "category": "speaker",
+            "description": "nothing"
+        },
+        {
+            "id": "3",
+            "date": "2024-1-20",
+            "amount": 1000000,
+            "category": "scooty",
+            "description": "automobile"
         }
     ]
 }

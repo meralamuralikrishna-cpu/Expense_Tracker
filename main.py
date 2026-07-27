@@ -14,19 +14,19 @@ def Add_Expense():
     loaded_data = Load_Expense()
 
     id = input("Enter Id: ").strip()
-    data = input("Enter Data: ").strip()
+    date = input("Enter Date: ").strip()
 
     try:
         amount = int(input("Enter Amount: ".strip()))
     except ValueError:
         print("Enter intger only")
 
-    category = input("Enter Category: ").strip()
-    description = input("Enter Description: ").strip()
+    category = input("Enter Category: ").strip().lower()
+    description = input("Enter Description: ").strip().lower()
 
     data = {
         "id":id,
-        "data":data,
+        "date":date,
         "amount":amount,
         "category":category,
         "description":description
@@ -49,6 +49,72 @@ def View_Expense():
             print(f"No Id was Found By the {id}")
             return 
 
+def Search_Expense():
+    print("1.ID")
+    print("2.Date")
+    print("3.Category")
+    print("4.Description")
+    print("5.Amount")
+
+    search_by = int(input("Enter your choice"))
+    loaded_data = Load_Expense()
+    match search_by:
+        case 1:
+            found = False
+            id = input("Enter Id")
+            for i in range(0,len(loaded_data["expenses"])):
+                if loaded_data["expenses"][i]["id"] == id:
+                    print(loaded_data["expenses"][i])
+                    found = True
+                    break
+            if not found:
+                print(f"No Id Was Found by the {id}")
+        case 2:
+            found = False
+            date = input("Enter Date")
+            for i in range(0,len(loaded_data["expenses"])):
+                if loaded_data["expenses"][i]["date"] == date:
+                    print(loaded_data["expenses"][i])
+                    found = True
+                    break
+            if not found:
+                print(f"No date was found by the {date}")
+
+        case 3:
+            found = False
+            category = input("Enter Category")
+            for i in range(0,len(loaded_data["expenses"])):
+                if loaded_data["expenses"][i]["category"] == category:
+                    print(loaded_data["expenses"][i])
+                    found = True
+                    break
+            if not found:
+                print(f"No Data was Found by the {category}")
+
+        case 4:
+            found = False
+            description = input("Enter Description to search")
+            for i in range(0,len(loaded_data["expenses"])):
+                if loaded_data["expenses"][i]["description"] == description:
+                    found = True
+                    print(loaded_data["expenses"][i])
+                    break
+            if not found:
+
+                print(f"No Data Was Found by the {description}")
+
+        case 5:
+            found = False
+            amount = int(input("Enter Amount to Search: "))
+            for i in range(0,len(loaded_data["expenses"])):
+                if loaded_data["expenses"][i]["amount"] == amount:
+                    print(loaded_data["expenses"][i])
+                    found = True
+                    break
+            if not found:
+                print(f"No Data was Found by the {amount}")
+
+
 def Delete_Expense():
     loaded_data = Load_Expense()
     id = input("Enter Id to Delete: ").strip()
@@ -70,6 +136,21 @@ def calculate_total():
 
     print(total)
 
+def Highest_Expense():
+    loaded_data = Load_Expense()
+    max_amount = loaded_data["expenses"][0]["amount"]
+    for i in range(1,len(loaded_data["expenses"])):
+        if max_amount < loaded_data["expenses"][i]["amount"]:
+            max_amount = loaded_data["expenses"][i]["amount"]
 
-Delete_Expense()
+    print(max_amount)
+
+def Lowest_Expense():
+    loaded_data = Load_Expense()
+    min_amount = loaded_data["expenses"][0]["amount"]
+    for i in range(1,len(loaded_data["expenses"])):
+        if min_amount > loaded_data["expenses"][i]["amount"]:
+            min_amount = loaded_data["expenses"][i]["amount"]
+
+    print(min_amount)
 

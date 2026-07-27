@@ -1,4 +1,5 @@
 import json
+import time
 
 def Load_Expense():
     with open("expenses.json","r") as file:
@@ -14,7 +15,7 @@ def Add_Expense():
     loaded_data = Load_Expense()
 
     id = input("Enter Id: ").strip()
-    date = input("Enter Date: ").strip()
+    date = input("Enter Date(DD/MM/YYYY): ").strip()
 
     try:
         amount = int(input("Enter Amount: ".strip()))
@@ -154,3 +155,36 @@ def Lowest_Expense():
 
     print(min_amount)
 
+def menu():
+    while True:
+        print("1.Add Expenses")
+        print("2.View Expense")
+        print("3.Search Expense")
+        print("4.Delete Expense")
+        print("Calulate Expense")
+        print("6.Highest Expense")
+        print("7.Lowest Expense")
+        print("8.Exit")
+
+        choice = int(input("Enter your choice"))
+
+        if choice == 1:
+            Add_Expense()
+        elif choice == 2:
+            View_Expense()
+        elif choice == 3:
+            Search_Expense()
+        elif choice == 4:
+            Delete_Expense()
+        elif choice == 5:
+            calculate_total()
+        elif choice == 6:
+            Highest_Expense()
+        elif choice == 7:
+            Lowest_Expense()
+        elif choice == 8:
+            print("Exiting.....")
+            time.sleep(1)
+            break
+
+menu()

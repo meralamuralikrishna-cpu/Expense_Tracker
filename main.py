@@ -16,11 +16,11 @@ def Add_Expense():
 
     id = input("Enter Id: ").strip()
     date = input("Enter Date(DD/MM/YYYY): ").strip()
-
-    try:
-        amount = int(input("Enter Amount: ".strip()))
-    except ValueError:
-        print("Enter intger only")
+    while True:
+            try:
+                amount = int(input("Enter Amount").strip())
+            except ValueError:
+                print("Enter intger only")
 
     category = input("Enter Category: ").strip().lower()
     description = input("Enter Description: ").strip().lower()
@@ -40,15 +40,15 @@ def Add_Expense():
     """
 def View_Expense():
     loaded_data = Load_Expense()
-
+    found = False
     id = input("Enter Id to view the Expense: ").strip()
     for i in range(0,len(loaded_data["expenses"])):
         if loaded_data["expenses"][i]["id"] == id:
             print(loaded_data["expenses"][i])
-            return            
-        else:
-            print(f"No Id was Found By the {id}")
-            return 
+            found = True
+            break            
+        if not found:
+            print(f"No Id Was Found By the {id}")
 
 def Search_Expense():
     print("1.ID")
@@ -119,14 +119,15 @@ def Search_Expense():
 def Delete_Expense():
     loaded_data = Load_Expense()
     id = input("Enter Id to Delete: ").strip()
-
+    found = False
     for i in range(0,len(loaded_data["expenses"])):
         if loaded_data["expenses"][i]["id"] == id:
+            found = True
             del loaded_data["expenses"][i]
-            print(f"Successfully Deleted Id:{id}")
-        else:
-            print(f"No Id was Found by the {id}")
-
+            print(f"Successfully Deleted.")
+            break
+    if not found :
+        print(f"No Id was found by the {id}")
     Save_Expenses(loaded_data)
 
 def calculate_total():
@@ -161,7 +162,7 @@ def menu():
         print("2.View Expense")
         print("3.Search Expense")
         print("4.Delete Expense")
-        print("Calulate Expense")
+        print("5.Calulate Expense")
         print("6.Highest Expense")
         print("7.Lowest Expense")
         print("8.Exit")

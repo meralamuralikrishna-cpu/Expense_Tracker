@@ -1,5 +1,11 @@
 {
-    "expenses":[
-        
+    "expenses": [
+        {
+            "id": "1",
+            "date": "28/12/2005",
+            "amount": 500,
+            "category": "20",
+            "description": "20"
+        }
     ]
 }

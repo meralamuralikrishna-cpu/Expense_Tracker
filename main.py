@@ -2,23 +2,33 @@ import json
 import time
 
 def Load_Expense():
-    with open("expenses.json","r") as file:
-        loaded_data = json.load(file)
-        return loaded_data
+    try:
+        with open("expenses.json","r") as file:
+            loaded_data = json.load(file)
+            return loaded_data
+    except FileNotFoundError:
+        print("File not Found Error please create the file")
 
 def Save_Expenses(data):
-    with open("expenses.json","w") as file:
-        json.dump(data,file,indent=4)
+    try:
+        with open("expenses.json","w") as file:
+            json.dump(data,file,indent=4)
+    except FileNotFoundError:
+        print("File not Found Error please createh the file")
     
 def Add_Expense():
 
     loaded_data = Load_Expense()
-
     id = input("Enter Id: ").strip()
+    for i in range(0,len(loaded_data["expenses"])):
+        if loaded_data["expenses"][i]["id"] == id:
+            print("Alread Exits please Choose another id")
+            return 
     date = input("Enter Date(DD/MM/YYYY): ").strip()
     while True:
             try:
                 amount = int(input("Enter Amount").strip())
+                break
             except ValueError:
                 print("Enter intger only")
 
@@ -47,8 +57,8 @@ def View_Expense():
             print(loaded_data["expenses"][i])
             found = True
             break            
-        if not found:
-            print(f"No Id Was Found By the {id}")
+    if not found:
+        print(f"No Id Was Found By the {id}")
 
 def Search_Expense():
     print("1.ID")
@@ -140,7 +150,10 @@ def calculate_total():
 
 def Highest_Expense():
     loaded_data = Load_Expense()
-    max_amount = loaded_data["expenses"][0]["amount"]
+    try:
+        max_amount = loaded_data["expenses"][0]["amount"]
+    except IndexError:
+        print("Please Initial the values in Add Expense Function to make operations")
     for i in range(1,len(loaded_data["expenses"])):
         if max_amount < loaded_data["expenses"][i]["amount"]:
             max_amount = loaded_data["expenses"][i]["amount"]
@@ -149,7 +162,10 @@ def Highest_Expense():
 
 def Lowest_Expense():
     loaded_data = Load_Expense()
-    min_amount = loaded_data["expenses"][0]["amount"]
+    try:
+        min_amount = loaded_data["expenses"][0]["amount"]
+    except IndexError:
+        print("Please Initalized the values in Add Expense Fucntion to make operations")
     for i in range(1,len(loaded_data["expenses"])):
         if min_amount > loaded_data["expenses"][i]["amount"]:
             min_amount = loaded_data["expenses"][i]["amount"]
@@ -167,7 +183,12 @@ def menu():
         print("7.Lowest Expense")
         print("8.Exit")
 
-        choice = int(input("Enter your choice"))
+        while True:
+            try:
+                choice = int(input("Enter your choice"))
+                break
+            except ValueError:
+                print("please Enter only the integers")
 
         if choice == 1:
             Add_Expense()

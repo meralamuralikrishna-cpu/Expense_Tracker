@@ -19,7 +19,7 @@ def Save_Expenses(data):
 def Add_Expense():
 
     loaded_data = Load_Expense()
-    id = input("Enter Id: ").strip()
+    id = int(input("Enter Id").strip())
     for i in range(0,len(loaded_data["expenses"])):
         if loaded_data["expenses"][i]["id"] == id:
             print("Alread Exits please Choose another id")
@@ -51,14 +51,25 @@ def Add_Expense():
 def View_Expense():
     loaded_data = Load_Expense()
     found = False
-    id = input("Enter Id to view the Expense: ").strip()
-    for i in range(0,len(loaded_data["expenses"])):
-        if loaded_data["expenses"][i]["id"] == id:
-            print(loaded_data["expenses"][i])
-            found = True
-            break            
-    if not found:
-        print(f"No Id Was Found By the {id}")
+    print("To View By ID press '1'")
+    print("To View all Expense press '2'")
+    print("Press 3 to Exit")
+    while True:
+        choice = int(input("Enter your choice"))
+        if choice == 1:
+            id = input("Enter Id to view the Expense: ").strip()
+            for i in range(0,len(loaded_data["expenses"])):
+                if loaded_data["expenses"][i]["id"] == id:
+                    print(loaded_data["expenses"][i])
+                    found = True
+                    break            
+            if not found:
+                print(f"No Id Was Found By the {id}")
+        elif choice == 2:
+            for i in range(0,len(loaded_data["expenses"])):
+                print(loaded_data["expenses"][i])
+        elif choice == 3:
+            break
 
 def Search_Expense():
     print("1.ID")
@@ -172,6 +183,81 @@ def Lowest_Expense():
 
     print(min_amount)
 
+def Update_Expense():
+    loaded_data = Load_Expense()
+    found = False
+    print("1.ID")
+    print("2.Date")
+    print("3.Category")
+    print("4.Description")
+    print("5.Amount")
+    print("6.Exit")
+
+    while True:
+        choice = int(input("Enter your Choice"))
+        if choice ==  1:
+            while True:
+                try:
+                    old_id = int(input("Enter your old id"))
+                    break
+                except ValueError as e:
+                    print("Enter only Valid Numbers")
+
+            for i in range(0,len(loaded_data['expenses'])):
+                if loaded_data["expenses"][i]["id"] == old_id:
+                    new_id = int(input("Enter New Id"))
+                    loaded_data["expenses"][i]["id"] = new_id
+                    found = True
+                    print(f"Upated Successfully {old_id}->{new_id}")
+                    Save_Expenses(loaded_data)
+                    break
+            if not found:
+                print(f"No Id Was Found by the {old_id}")
+
+        elif choice  == 3:
+            old_category = input("Enter your Old Category").strip().lower()
+            for i in range(0,len(loaded_data["expenses"])):
+                if loaded_data["expenses"][i]["category"] == old_category:
+                    new_category = input("Enter new category name")
+                    loaded_data["expenses"][i]["category"] = new_category
+                    Save_Expenses(loaded_data)
+                    print(f"Successfully Updated {old_category}->{new_category}")
+                    found = True
+                    break
+            if not found:
+                print(f"No  category  was Found by the {old_category}")
+
+        elif choice == 4:
+            old_description = input("Enter Your Old Description")
+            for i in range(0,len(loaded_data["expenses"])):
+                if loaded_data["expenses"][i]["description"] == old_description:
+                    new_description = input("Enter new Description")
+                    loaded_data["expenses"][i]["description"] = new_description
+                    found = True
+                    Save_Expenses(loaded_data)
+                    print(f"Successfully changed {old_description}->{new_description}")
+                    break
+            if not found:
+                print(f"No Description was found by the {old_category}") 
+
+        elif choice == 5:
+            selected_id = int(input("Enter the id to change"))
+            index = 0
+            for i in range(0,len(loaded_data["expenses"])):
+                if loaded_data["expenses"][i]["id"] == selected_id:
+                    index = i
+                    new_amount = int(input("Enter New Amount"))
+                    loaded_data["expenses"][index]["amount"] = new_amount
+                    found = True
+                    Save_Expenses(loaded_data)
+                    print(f"Successfully Changed the amount New_Amount:{new_amount}")
+                    break
+            if not found:
+                print(f"No Id was Found by the {selected_id}")
+        elif choice == 6:
+            break
+
+
 def menu():
     while True:
         print("1.Add Expenses")
@@ -209,4 +295,4 @@ def menu():
             time.sleep(1)
             break
 
-menu()
+Update_Expense()

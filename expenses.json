@@ -1,11 +1,25 @@
 {
     "expenses": [
         {
-            "id": "1",
+            "id": 1,
             "date": "28/12/2005",
             "amount": 500,
-            "category": "20",
+            "category": "drinking",
             "description": "20"
+        },
+        {
+            "id": 2,
+            "date": "28/12/2007",
+            "amount": 400,
+            "category": "dancing",
+            "description": "blah blah"
+        },
+        {
+            "id": 25,
+            "date": "25/12/2008",
+            "amount": 500,
+            "category": "20",
+            "description": "10"
         }
     ]
 }

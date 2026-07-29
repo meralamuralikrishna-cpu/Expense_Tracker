@@ -59,7 +59,7 @@ def View_Expense():
     while True:
         choice = int(input("Enter your choice: "))
         if choice == 1:
-            id = input("Enter Id to view the Expense: ").strip()
+            id = int(input("Enter Id to view the Expense: ").strip())
             for i in range(0,len(loaded_data["expenses"])):
                 if loaded_data["expenses"][i]["id"] == id:
                     print(loaded_data["expenses"][i])
@@ -85,7 +85,7 @@ def Search_Expense():
     match search_by:
         case 1:
             found = False
-            id = input("Enter Id: ")
+            id = int(input("Enter Id: "))
             for i in range(0,len(loaded_data["expenses"])):
                 if loaded_data["expenses"][i]["id"] == id:
                     print(loaded_data["expenses"][i])
@@ -141,7 +141,7 @@ def Search_Expense():
 
 def Delete_Expense():
     loaded_data = Load_Expense()
-    id = input("Enter Id to Delete: ").strip()
+    id = int(input("Enter Id to Delete: ").strip())
     found = False
     for i in range(0,len(loaded_data["expenses"])):
         if loaded_data["expenses"][i]["id"] == id:
@@ -154,7 +154,7 @@ def Delete_Expense():
     Save_Expenses(loaded_data)
 
 def calculate_total():
-    total:int = 0
+    total  = 0
     loaded_data =  Load_Expense()
     for i in range(0,len(loaded_data["expenses"])):
         total += loaded_data["expenses"][i]["amount"]
@@ -167,6 +167,7 @@ def Highest_Expense():
         max_amount = loaded_data["expenses"][0]["amount"]
     except IndexError:
         print("Please Initial the values in Add Expense Function to make operations")
+        return
     for i in range(1,len(loaded_data["expenses"])):
         if max_amount < loaded_data["expenses"][i]["amount"]:
             max_amount = loaded_data["expenses"][i]["amount"]
@@ -179,6 +180,7 @@ def Lowest_Expense():
         min_amount = loaded_data["expenses"][0]["amount"]
     except IndexError:
         print("Please Initalized the values in Add Expense Fucntion to make operations")
+        return
     for i in range(1,len(loaded_data["expenses"])):
         if min_amount > loaded_data["expenses"][i]["amount"]:
             min_amount = loaded_data["expenses"][i]["amount"]
@@ -277,6 +279,38 @@ def Update_Expense():
             break
 
 
+def category_summary():
+    loaded_data = Load_Expense()
+    category = input("Enter Category: ").strip().lower()
+    found = False
+    total = 0
+    for i in range(0,len(loaded_data["expenses"])):
+        if category == loaded_data["expenses"][i]["category"]:
+            total += loaded_data["expenses"][i]["amount"]
+            found = True
+
+    if found == True:
+        print(f"Category Summary of {category} = {total}")
+
+    if not found:
+        print(f"No Category was Found {category} in data")
+
+def Average_Expense():
+    loaded_data = Load_Expense()
+    average = []
+    count = 0
+    for i in range(0,len(loaded_data["expenses"])):
+        average.append(loaded_data["expenses"][i]["amount"])
+    try:
+        average = sum(average) / len(average)
+    except ZeroDivisionError:
+        print("Values must be Initialzed before operations")
+        return
+
+    
+    print(average)
+    
+
 def menu():
     while True:
         print("1.Add Expenses")
@@ -284,10 +318,12 @@ def menu():
         print("3.Search Expense")
         print("4.Delete Expense")
         print("5.Update Expense")
-        print("6.Calulate Expense")
-        print("7.Highest Expense")
-        print("8.Lowest Expense")
-        print("9.Exit")
+        print("6.Calculate Expense")
+        print("7.category Expense")
+        print("8.Highest Expense")
+        print("9.Lowest Expense")
+        print("10.Average Expense")
+        print("11.Exit")
 
         while True:
             try:
@@ -295,6 +331,7 @@ def menu():
                 break
             except ValueError:
                 print("please Enter only the integers")
+                return
 
         if choice == 1:
             Add_Expense()
@@ -309,12 +346,18 @@ def menu():
         elif choice == 6:
             calculate_total()
         elif choice == 7:
-            Highest_Expense()
+            category_summary()
         elif choice == 8:
-            Lowest_Expense()
+            Highest_Expense()
         elif choice == 9:
+            Lowest_Expense()
+        elif choice == 10:
+            Average_Expense()
+        elif choice == 11:
             print("Exiting.....")
             time.sleep(1)
             break
+        else:
+            print("Invalid Choice!")
 
 menu()

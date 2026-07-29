@@ -2,24 +2,87 @@
     "expenses": [
         {
             "id": 1,
-            "date": "28/12/2005",
-            "amount": 500,
-            "category": "drinking",
-            "description": "20"
+            "date": "02/07/2026",
+            "amount": 45,
+            "category": "food",
+            "description": "breakfast at local cafe"
         },
         {
             "id": 2,
-            "date": "28/12/2007",
-            "amount": 400,
-            "category": "dancing",
-            "description": "blah blah"
+            "date": "03/07/2026",
+            "amount": 120,
+            "category": "transportation",
+            "description": "bus pass recharge"
         },
         {
-            "id": 25,
-            "date": "25/12/2008",
+            "id": 3,
+            "date": "04/07/2026",
+            "amount": 850,
+            "category": "groceries",
+            "description": "weekly grocery shopping"
+        },
+        {
+            "id": 4,
+            "date": "05/07/2026",
+            "amount": 399,
+            "category": "entertainment",
+            "description": "movie ticket"
+        },
+        {
+            "id": 5,
+            "date": "06/07/2026",
+            "amount": 1200,
+            "category": "utilities",
+            "description": "electricity bill"
+        },
+        {
+            "id": 6,
+            "date": "08/07/2026",
+            "amount": 250,
+            "category": "healthcare",
+            "description": "medicine purchase"
+        },
+        {
+            "id": 7,
+            "date": "10/07/2026",
+            "amount": 1800,
+            "category": "education",
+            "description": "online programming course"
+        },
+        {
+            "id": 8,
+            "date": "12/07/2026",
+            "amount": 699,
+            "category": "shopping",
+            "description": "t-shirt and jeans"
+        },
+        {
+            "id": 9,
+            "date": "15/07/2026",
+            "amount": 150,
+            "category": "internet",
+            "description": "mobile data recharge"
+        },
+        {
+            "id": 10,
+            "date": "18/07/2026",
+            "amount": 220,
+            "category": "food",
+            "description": "dinner with friends"
+        },
+        {
+            "id": 11,
+            "date": "21/07/2026",
             "amount": 500,
-            "category": "20",
-            "description": "10"
+            "category": "fuel",
+            "description": "petrol refill"
+        },
+        {
+            "id": 12,
+            "date": "25/07/2026",
+            "amount": 300,
+            "category": "personal care",
+            "description": "haircut"
         }
     ]
 }
